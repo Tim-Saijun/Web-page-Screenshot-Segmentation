@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Web_page_Screenshot_Segmentation"
+version = "1.0.0"
+authors = [
+  { name= "Tim Saijun", email = "code@zair.top"},
+]
+description = "Divide long web page screenshots into blocks to input models with shorter contexts. 将长网页截图进行区块分割，用于输入上下文较短的模型"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["opencv", "website", "image segementation", "screenshot", "gpt"]
+dependencies = [
+    "opencv-python",
+    "numpy",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Tim-Saijun/Web_page_Screenshot_Segmentation"
+"Documentation" = "https://tim-saijun.github.io/Web_page_Screenshot_Segmentation/"
+
+[tool.setuptools]
+packages = ["Web_page_Screenshot_Segmentation"]
