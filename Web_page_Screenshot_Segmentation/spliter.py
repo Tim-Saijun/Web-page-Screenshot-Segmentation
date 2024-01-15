@@ -1,43 +1,52 @@
 import cv2
 import argparse
 import os
+from pathlib import Path
 
 
-def draw_line_from_file(image_file, heights, color=(0, 0, 255)):
-    """
-    :param image_file: 图片文件路径
-    :param heights: 分割线高度列表
-    :param color: 分割线颜色
-    :return: 分割后的图片路径
-    """
-    try:
-        image = cv2.imread(image_file)
-    except:
-        raise Exception(
-            "Failed to read image file, Please check if the file path contains '.' or Chinese characters. "
-            "读取图片失败，请检查文件路径是否包含'.'或者中文字符")
-    for height in heights:
-        cv2.line(image, (0, height), (image.shape[1], height), color, 2)
-    result_name = image_file.split('.')[-2] + 'result.jpg'
-    abs_path = os.path.abspath('result/' + result_name)
-    cv2.imwrite(abs_path, image)
-    return abs_path
+def split_and_save_image(img, heights, output_dir):
+    img = cv2.imread(img)
+    img_height = img.shape[0]
+    # Ensure the output directory exists
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
 
+    # Initialize the start of the first slice
+    start_y = 0
+    # Iterate over the split heights
+    if heights[0] < 200:
+        del heights[0]
+    if len(heights) == 0:
+        heights.append(img_height)
 
-def draw_line(image, heights, color=(0, 0, 255)):
-    for height in heights:
-        cv2.line(image, (0, height), (image.shape[1], height), color, 2)
-    return image
+    heights = [h for h in heights if h < img_height]
+    # If the last height is less than the image height, add the image height to the list to include the last segment
+    if heights[-1] < img_height:
+        heights.append(img_height)
+
+    for i, height in enumerate(heights):
+        # Define the end of the slice
+        end_y = height
+        # Slice the image
+        img_slice = img[start_y:end_y, :]
+        # Save the slice
+        slice_path = os.path.join(output_dir, f'slice_{i}.png')
+        # slice_path = os.path.abspath(slice_path)
+        cv2.imwrite(slice_path, img_slice)
+        # The start of the next slice
+        start_y = end_y
+
+    return output_dir
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image_file', type=str,
+    parser.add_argument('--image_file', '-f',type=str,
                         help='图片文件路径')
     parser.add_argument('--height_list', '-hl', type=str, default='[]', help='分割线高度列表')
-    parser.add_argument('--color', type=str, default='(0, 0, 255)', help='分割线颜色')
+    parser.add_argument('--output_dir', '-o', type=str, default='split_images', help='分割完成后的图片保存目录，建议给每个要处理的图片传入一个不同的目录')
     args = parser.parse_args()
     image_file = args.image_file
     heights = eval(args.height_list)
-    color = eval(args.color)
-    res = draw_line_from_file(image_file, heights, color)
+    output_dir = args.output_dir
+    res = split_and_save_image(image_file, heights,output_dir)
+    res = os.path.abspath(res)
     print(res)

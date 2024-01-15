@@ -7,35 +7,40 @@
 更多结果可以在[images](images)目录中找到。
 
 ## 开始使用
-### 安装依赖项
+### 安装
 ```
-pip install opencv-python numpy
-```
-### 拉取代码
-```bash
-git clone https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation.git
-cd Web-page-Screenshot-Segmentation/Web_page_Screenshot_Segmentation
+ pip install Web-page-Screenshot-Segmentation
 ```
 
 ## 在命令行中使用
 获取图像的分割线的高度
 ```bash
-python master.py --file_path path/to/image.jpg --split True --height_threshold 102 --variation_threshold 0.5 --color_threshold 100 --color_variation_threshold 15 --merge_threshold 350
+python -m Web_page_Screenshot_Segmentation.master -f "path/to/img"
 ```
-在图像中画出分割线
+输出应该是个列表:` [6, 868, 1912, 2672, 3568, 4444, 5124, 6036, 7698] `。它是图像分割线的高度列表。
+如果你想在图中显示这条分割线，可以加上` -s True`参数：
 ```bash
-python spliter.py --image_file path/to/image.jpg --hl [100,200] --color (0,255,0)
+python -m Web_page_Screenshot_Segmentation.master -f "path/to/img" -s True
 ```
+
+### 在图像中画出分割线
+```bash
+python -m Web_page_Screenshot_Segmentation.drawer --image_file path/to/image.jpg --hl [100,200] --color (0,255,0)
+```
+
+### 切分图像
+```bash
+python -m Web_page_Screenshot_Segmentation.spliter --f path/to/image.jpg -ht "[233,456]"
+```
+你将得到分割图像，保存在命令返回的路径中。
+
 更多用法解释请参照帮助：
 ```bash
 python master.py --help
 python spliter.py --help
 ```
 
-## 使用Pypi包
-```bash
- pip install Web-page-Screenshot-Segmentation
-```
+## 从源码使用
 ### split_heights 函数
 
 `split_heights` 函数用于根据各种阈值将图像分割成几个部分。它接受以下参数：
