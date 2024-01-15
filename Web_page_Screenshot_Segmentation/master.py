@@ -1,9 +1,9 @@
 import cv2
 import os
 import argparse
-from blank_spliter import find_height_spliter
-from color_spliter import color_height_spliter
-from spliter import draw_line
+from .blank_spliter import find_height_spliter
+from .color_spliter import color_height_spliter
+from .spliter import draw_line
 
 
 def remove_close_values(lst: list[int], threshold: int) -> list[int]:
