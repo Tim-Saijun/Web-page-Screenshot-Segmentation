@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Web_page_Screenshot_Segmentation"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name= "Tim Saijun", email = "code@zair.top"},
 ]

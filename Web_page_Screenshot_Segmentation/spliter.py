@@ -2,7 +2,8 @@ import cv2
 import argparse
 import os
 from pathlib import Path
-
+from PIL import Image
+from io import BytesIO
 
 def split_and_save_image(img, heights, output_dir):
     img = cv2.imread(img)
@@ -36,6 +37,37 @@ def split_and_save_image(img, heights, output_dir):
         start_y = end_y
 
     return output_dir
+
+def split_and_save_image_pil(img, heights):
+    """
+    使用PIL库切割图片，功能与上一个函数相同，但可通过代码调用实现数据不落盘，全程在内存中处理，加快处理速度。
+    参数:
+    img (PIL.Image): 要切割的 PIL 图像对象。
+    heights (list of int): 切割点的高度列表。
+
+    返回:
+    list of bytes: 切割后的图像的二进制列表。
+    """
+    img_height = img.height
+    images = []
+
+    # 修正高度列表
+    heights = [h for h in heights if 200 <= h < img_height]
+    if len(heights) == 0 or heights[-1] < img_height:
+        heights.append(img_height)
+
+    start_y = 0
+    for height in heights:
+        # 切割图像
+        img_slice = img.crop((0, start_y, img.width, height))
+        # 将切割后的图像转换为二进制
+        img_byte_arr = BytesIO()
+        img_slice.save(img_byte_arr, format='PNG')
+        img_byte_arr = img_byte_arr.getvalue()
+        images.append(img_byte_arr)
+        start_y = height
+
+    return images
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
