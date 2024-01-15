@@ -1,4 +1,5 @@
-[简体中文](README-ZH.md)
+[![PyPI - Version](https://img.shields.io/pypi/v/Web_page_Screenshot_Segmentation)](https://pypi.org/project/Web_page_Screenshot_Segmentation/) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Tim-Saijun/Web-page-Screenshot-Segmentation/python-publish.yml)](https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation/actions/workflows/python-publish.yml)[![PyPI - License](https://img.shields.io/pypi/l/Web_page_Screenshot_Segmentation)](https://pypi.org/project/Web_page_Screenshot_Segmentation/)   [![Static Badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-8A2BE2)](README-ZH.md) [![Static Badge](https://img.shields.io/badge/English-blue)](README.md)
+
 ## Introduction
 This project is used to split the long screenshot of web pages into several parts based on the height of the text. The main idea is to find the low variation region of the image, and then find the split line in the low variation region. 
 ![The Red lines are split lines ](images/demo.png)
@@ -25,7 +26,12 @@ python master.py --help
 python spliter.py --help
 ```
 
-## split_heights function
+## Using the Pypi Package
+```bash
+ pip install Web-page-Screenshot-Segmentation
+```
+ 
+### split_heights function
 
 The `split_heights` function is used to split an image into several parts based on various thresholds. It takes the following parameters:
 
@@ -39,10 +45,11 @@ The `split_heights` function is used to split an image into several parts based 
 
 The function returns a list of heights of the split lines if `split` is `False`, or the path of the split image if `split` is `True`.
 
-### Example usage
+#### Example usage
 
 ```python
-from master import split_heights
+import Web_page_Screenshot_Segmentation
+from Web_page_Screenshot_Segmentation.master import split_heights
 
 # Split the image at 'path/to/image.jpg' into several parts
 split_image_path = split_heights(
@@ -61,7 +68,7 @@ print(f"The split image is saved at {split_image_path}")
 In this example, the image at 'path/to/image.jpg' is split into several parts based on the provided thresholds. The split image is saved at the path returned by the function.
 
 
-## draw_line_from_file function
+### draw_line_from_file function
 
 The `draw_line_from_file` function is used to draw lines on an image at specified heights. It takes the following parameters:
 
@@ -73,10 +80,11 @@ The function reads the image from the provided file path, draws lines at the spe
 
 If the function encounters an error while reading the image file (for example, if the file path contains '.' or Chinese characters), it raises an exception.
 
-### Example usage
+#### Example usage
 
 ```python
-from spliter import draw_line_from_file
+import Web_page_Screenshot_Segmentation
+from Web_page_Screenshot_Segmentation.spliter import draw_line_from_file
 
 # Draw lines on the image at 'path/to/image.jpg' at heights 100 and 200
 result_image_path = draw_line_from_file(
