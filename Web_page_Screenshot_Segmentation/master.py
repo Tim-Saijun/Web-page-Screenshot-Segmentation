@@ -3,7 +3,7 @@ import os
 import argparse
 from .blank_spliter import find_height_spliter
 from .color_spliter import color_height_spliter
-from .spliter import draw_line
+from .drawer import draw_line
 
 
 def remove_close_values(lst: list[int], threshold: int) -> list[int]:
@@ -11,7 +11,7 @@ def remove_close_values(lst: list[int], threshold: int) -> list[int]:
     给定一个列表，将里面数值差异在Threshold以内的数值进行去除，保留最大的那个数值，用于去除重复或接近的分割线
     """
     lst.sort()
-    # 如果最小的值小于threshold，直接删除
+    # 如果最小的值小于threshold，直接删除,在spliter中15行有相同的代码
     if lst[0] < 200:
         del lst[0]
     i = len(lst) - 1

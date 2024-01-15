@@ -7,35 +7,43 @@ The output are small but complete images of the web page, which can be used to g
 More results can be found in the [images](images) directory.
 
 ## Getting started
-### Install the dependencies
-```
-pip install opencv-python numpy
-```
-### Pull the Code
-```bash
-git clone https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation.git
-cd Web-page-Screenshot-Segmentation/Web_page_Screenshot_Segmentation
-```
-
-## Using in the command line
-Obtain the height of the split line of the image
-```bash
-python master.py --file_path path/to/image.jpg --split True --height_threshold 102 --variation_threshold 0.5 --color_threshold 100 --color_variation_threshold 15 --merge_threshold 350
-```
-Draw the split lines on the image
-```bash
-python spliter.py --image_file path/to/image.jpg --hl [100,200] --color (0,255,0)
-```
-For details, please refer to the help information
-```bash
-python master.py --help
-python spliter.py --help
-```
-
-## Using the Pypi Package
+### Install 
 ```bash
  pip install Web-page-Screenshot-Segmentation
 ```
+
+## Using in the command line
+### Obtain the height of the split line of the image
+```bash
+python -m Web_page_Screenshot_Segmentation.master -f "path/to/img"
+```
+The output looks like this: ` [6, 868, 1912, 2672, 3568, 4444, 5124, 6036, 7698] `. It is the height list of the split line of the image.
+
+If you want to check the split line on the image, you can use the following command:
+```bash
+python -m Web_page_Screenshot_Segmentation.master -f "path/to/img" -s True
+```
+Then you can get the path to the result image.
+
+### Draw the split lines on the image
+```bash
+python -m Web_page_Screenshot_Segmentation.drawer --image_file path/to/image.jpg --hl [100,200] --color (0,255,0)
+```
+
+### Split the image
+```bash
+python -m Web_page_Screenshot_Segmentation.spliter --f path/to/image.jpg -ht "[233,456]"
+```
+You will get the split image at the path returned by the command.
+
+For details, please refer to the help information
+```bash
+python -m Web_page_Screenshot_Segmentation.master --help
+python -m Web_page_Screenshot_Segmentation.drawer --help
+python -m Web_page_Screenshot_Segmentation.spliter --help
+```
+
+## Using from the Source Code
  
 ### split_heights function
 
