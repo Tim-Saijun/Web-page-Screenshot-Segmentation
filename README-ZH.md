@@ -1,10 +1,12 @@
+[![PyPI - Version](https://img.shields.io/pypi/v/Web_page_Screenshot_Segmentation)](https://pypi.org/project/Web_page_Screenshot_Segmentation/) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Tim-Saijun/Web-page-Screenshot-Segmentation/python-publish.yml)](https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation/actions/workflows/python-publish.yml)[![PyPI - License](https://img.shields.io/pypi/l/Web_page_Screenshot_Segmentation)](https://pypi.org/project/Web_page_Screenshot_Segmentation/)   [![Static Badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-8A2BE2)](README-ZH.md) [![Static Badge](https://img.shields.io/badge/English-blue)](README.md)
+
 ## 介绍
 该项目用于根据文本的高度将网页的长截图分割成几个部分。主要思想是找到图像的低变化区域，然后在低变化区域中找到分割线。
 ![红线是分割线](images/demo.png)
 输出的是网页的小而完整的图像，可以用于使用[Screen-to-code](https://github.com/abi/screenshot-to-code)生成网页或训练模型。
 更多结果可以在[images](images)目录中找到。
 
-## 入门
+## 开始使用
 ### 安装依赖项
 ```
 pip install opencv-python numpy
@@ -24,7 +26,11 @@ python master.py --help
 python spliter.py --help
 ```
 
-## split_heights 函数
+## 使用Pypi包
+```bash
+ pip install Web-page-Screenshot-Segmentation
+```
+### split_heights 函数
 
 `split_heights` 函数用于根据各种阈值将图像分割成几个部分。它接受以下参数：
 
@@ -38,10 +44,11 @@ python spliter.py --help
 
 如果 `split` 是 `False`，函数返回分割线的高程列表；如果 `split` 是 `True`，则返回分割图像的路径。
 
-### 示例用法
+#### 示例用法
 
 ```python
-from master import split_heights
+import Web_page_Screenshot_Segmentation
+from Web_page_Screenshot_Segmentation.master import split_heights
 
 # 在 'path/to/image.jpg' 分割图像为几个部分
 split_image_path = split_heights(
@@ -59,7 +66,7 @@ print(f"分割后的图像保存在 {split_image_path}")
 
 在这个例子中，根据提供的阈值，'path/to/image.jpg' 的图像被分割成几个部分。分割后的图像保存在函数返回的路径。
 
-## draw_line_from_file 函数
+### draw_line_from_file 函数
 
 `draw_line_from_file` 函数用于在指定高度的图像上绘制线条。它接受以下参数：
 
@@ -71,10 +78,11 @@ print(f"分割后的图像保存在 {split_image_path}")
 
 如果函数在读取图像文件时遇到错误（例如，如果文件路径包含 '.' 或中文字符），则会抛出异常。
 
-### 示例用法
+#### 示例用法
 
 ```python
-from spliter import draw_line_from_file
+import Web_page_Screenshot_Segmentation
+from Web_page_Screenshot_Segmentation.spliter import draw_line_from_file
 
 # 在 'path/to/image.jpg' 的图像上，在高度 100 和 200 处绘制线条
 result_image_path = draw_line_from_file(
