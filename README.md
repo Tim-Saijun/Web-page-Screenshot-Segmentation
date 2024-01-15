@@ -11,6 +11,12 @@ More results can be found in the [images](images) directory.
 ```
 pip install opencv-python numpy
 ```
+### Pull the Code
+```bash
+git clone https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation.git
+cd Web-page-Screenshot-Segmentation/Web_page_Screenshot_Segmentation
+```
+
 ## Using in the command line
 Obtain the height of the split line of the image
 ```bash
