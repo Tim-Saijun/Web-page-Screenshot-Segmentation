@@ -11,6 +11,12 @@
 ```
 pip install opencv-python numpy
 ```
+### 拉取代码
+```bash
+git clone https://github.com/Tim-Saijun/Web-page-Screenshot-Segmentation.git
+cd Web-page-Screenshot-Segmentation/Web_page_Screenshot_Segmentation
+```
+
 ## 在命令行中使用
 获取图像的分割线的高度
 ```bash
