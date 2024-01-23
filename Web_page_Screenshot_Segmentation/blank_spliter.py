@@ -23,7 +23,7 @@ def find_height_spliter(image, height_threshold, variation_threshold):
 
     # 处理最后一个区域
     if start_row is not None and (gray.shape[0] - start_row) >= height_threshold:
-        heights.append((start_row, gray.shape[0]))
+        heights.append(start_row)
 
     return heights
 
