@@ -98,7 +98,7 @@ If the function encounters an error while reading the image file (for example, i
 
 ```python
 import Web_page_Screenshot_Segmentation
-from Web_page_Screenshot_Segmentation.spliter import draw_line_from_file
+from Web_page_Screenshot_Segmentation.drawer import draw_line_from_file
 
 # Draw lines on the image at 'path/to/image.jpg' at heights 100 and 200
 result_image_path = draw_line_from_file(
